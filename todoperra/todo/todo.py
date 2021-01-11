@@ -78,5 +78,8 @@ def update(id):
 
 @bp.route('/<int:id>/delete', methods=['POST'])
 @login_required
-def delete():
-	return ''
+def delete(id):
+	db, c = get_db()
+	c.execute('DELETE FROM todo WHERE id = %s', (id,))
+	db.commit()
+	return redirect(url_for('todo.index'))
