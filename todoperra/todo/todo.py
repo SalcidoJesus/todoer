@@ -12,7 +12,9 @@ bp = Blueprint('todo', __name__)
 def index():
 	db, c = get_db()
 	c.execute(
-		'SELECT t.id, t.description, u.username, t.completed, t.created_at FROM todo t JOIN user u on t.created_by = u.id order by created_at desc'
+		'SELECT t.id, t.description, u.username, t.completed, t.created_at '
+		'FROM todo t JOIN user u on t.created_by = u.id WHERE t.created_by = %s order by created_at desc',
+		 (g.user['id'],)
 	)
 	todos = c.fetchall()
 
@@ -69,7 +71,7 @@ def update(id):
 		else:
 			db, c = get_db()
 			c.execute(
-				'UPDATE todo SET description = %s, completed = %s WHERE id = %s', (description, completed, id)
+				'UPDATE todo SET description = %s, completed = %s WHERE id = %s AND created_by = %s', (description, completed, id, g.user['id'])
 			)
 			db.commit()
 			return redirect(url_for('todo.index'))
@@ -80,6 +82,6 @@ def update(id):
 @login_required
 def delete(id):
 	db, c = get_db()
-	c.execute('DELETE FROM todo WHERE id = %s', (id,))
+	c.execute('DELETE FROM todo WHERE id = %s AND created_by = %s', (id, g.user['id']))
 	db.commit()
 	return redirect(url_for('todo.index'))
