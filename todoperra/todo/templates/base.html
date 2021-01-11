@@ -4,7 +4,7 @@
 <nav>
     <h1>Todo List</h1>
     <ul>
-    {{ if g.user }}
+    {% if g.user %}
         <li>
             <span>{{ g.user['username'] }}</span>
         </li>
@@ -13,7 +13,7 @@
                 Salir ajsk
             </a>
         </li>
-    {{ else }}
+    {% else %}
         <li>
             <a href="{{ url_for('auth.register') }}">
                 Registrarse
@@ -24,7 +24,7 @@
                 Iniciar sesión
             </a>
         </li>
-    {{ endif }}
+    {% endif %}
     </ul>
 </nav>
 <section>
