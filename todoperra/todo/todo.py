@@ -12,7 +12,7 @@ bp = Blueprint('todo', __name__)
 def index():
 	db, c = get_db()
 	c.execute(
-		'SELECT t.id, t.descripcion, u.username, t.completed, t.created_at FROM todo t JOIN user u on t.created_by = u.id order by created_at desc'
+		'SELECT t.id, t.description, u.username, t.completed, t.created_at FROM todo t JOIN user u on t.created_by = u.id order by created_at desc'
 	)
 	todos = c.fetchall()
 
