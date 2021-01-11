@@ -21,6 +21,22 @@ def index():
 @bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
+	if request.method == 'POST':
+		description = request.form['description']
+		error = None
+
+		if not description:
+			error = "y la descripción perro?"
+
+		if error is not None:
+			flash(error)
+		else:
+			db, c = get_db()
+			c.execute(
+				'INSERT INTO todo (created_by, description, completed) VALUES (%s, %s, %s)', (g.user['id'],description, False)
+			)
+			db.commit()
+			return redirect(url_for('todo.index'))
 	return render_template('todo/create.html')
 
 @bp.route('/update', methods=['GET', 'POST'])
