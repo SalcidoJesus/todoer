@@ -2,10 +2,12 @@
 
 {% block header %}
 	<h1>
-		{% block title %}Iniciar sesión{% endblock %}
+		{% block title %}Todos{% endblock %}
 	</h1>
 	{% if g.user %}
-		<a class="action" href="{{ url_for('todo.create') }}"></a>
+		<a class="action" href="{{ url_for('todo.create') }}">
+			nuevo
+		</a>
 	{% endif %}
 {% endblock %}
 
@@ -24,7 +26,7 @@
 					<div class="about">
 						{{ todo['created_at'].strftime('%Y-%m-%d') }}
 						<a class="action" href="{{ url_for('todo.update', id=todo['id']) }}">
-							
+							Editar
 						</a>
 					</div>
 				</div>
