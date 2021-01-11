@@ -1,0 +1,36 @@
+ah pues a instalar flask y todo el desmadre que se ocupa, ah pero güindos
+info de Flask sacada de aquí
+https://flask.palletsprojects.com/en/1.1.x/installation/
+
+ah ps creas una carpeta, adentro ejecutas estas cosas para crear un entorno virtual
+
+--instalar entorno virtual--
+py -3 -m venv venv
+
+--activar entorno virtual--
+venv\Scripts\activate
+(usar estas cosas \ porque si usas estas / no sirve)
+
+--instalar werkzeug--
+pip install werkzeug
+
+--instalar conector MySQL--
+pip install mysql-connector-python
+
+--instalar Flask--
+pip install Flask
+(con F mayúscula)
+
+ah y pues ya alaroña, nomás que debes cambiar el entorno de producción (es cuando esta listo para subirse a la web) a desarrollo (ps cuando se esta desarrollando y lo tienes en tu pc por ejemplo) si no lo cambias tons vas a tener que andar reiniciando el servidor cada que haya nuevos cambios.
+
+--cambiar el entorno (environment)--
+set FLASK_ENV=development
+
+--agregar modulo a Flask--
+set FLASK_APP=todo
+
+--iniciar el servidor--
+flask run
+
+ya luego nomás entras a esta dirección y listo
+http://127.0.0.1:5000/
